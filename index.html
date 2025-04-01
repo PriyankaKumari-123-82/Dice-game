@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dice Game</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="winner">🎲 Roll the Dice 🎲</h1>
+
+      <div class="player-inputs">
+        <input type="text" id="player1" placeholder="Enter Player 1 Name" />
+        <input type="text" id="player2" placeholder="Enter Player 2 Name" />
+      </div>
+
+      <div class="dice-container">
+        <div class="dice">
+          <p id="p1-name">Player 1</p>
+          <img class="img1" src="images/dice6.png" />
+        </div>
+
+        <div class="dice">
+          <p id="p2-name">Player 2</p>
+          <img class="img2" src="images/dice6.png" />
+        </div>
+      </div>
+
+      <button class="roll-button" onclick="rollDice()">🎲 Roll Dice 🎲</button>
+
+      <p id="result"></p>
+    </div>
+
+    <footer>www 🎲 App Brewery 🎲 com</footer>
+
+    <script>
+      function rollDice() {
+        const player1 = document.getElementById("player1").value || "Player 1";
+        const player2 = document.getElementById("player2").value || "Player 2";
+
+        document.getElementById("p1-name").textContent = player1;
+        document.getElementById("p2-name").textContent = player2;
+
+        const roll1 = Math.floor(Math.random() * 6) + 1;
+        const roll2 = Math.floor(Math.random() * 6) + 1;
+
+        document.querySelector(".img1").src = `images/dice${roll1}.png`;
+        document.querySelector(".img2").src = `images/dice${roll2}.png`;
+
+        let resultText = `${player1} rolled: ${roll1} <br> ${player2} rolled: ${roll2} <br>`;
+
+        if (roll1 > roll2) {
+          resultText += `<strong>${player1} wins! 🎉</strong>`;
+        } else if (roll2 > roll1) {
+          resultText += `<strong>${player2} wins! 🎉</strong>`;
+        } else {
+          resultText += "It's a tie! 🎲";
+        }
+
+        document.getElementById("result").innerHTML = resultText;
+        document.getElementById("winner").innerHTML = roll1 > roll2 ? `${player1} Wins! 🏆` : roll2 > roll1 ? `${player2} Wins! 🏆` : "It's a Tie!";
+      }
+    </script>
+  </body>
+</html>
